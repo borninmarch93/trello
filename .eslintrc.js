@@ -3,8 +3,7 @@ module.exports =  {
     extends:  [
         'plugin:react/recommended',
         'plugin:@typescript-eslint/recommended',
-        'prettier/@typescript-eslint',
-        'plugin:prettier/recommended',
+        'prettier'
     ],
     parserOptions:  {
         ecmaVersion:  2018,
@@ -14,6 +13,7 @@ module.exports =  {
         },
     },
     rules:  {
+        "react/prop-types": "off"
     },
     settings:  {
         react:  {

@@ -1,0 +1,10 @@
+.header {
+    @include flexbox;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.32);
+    justify-content: space-between;
+    height: 40px;
+    max-width: 100%;
+    text-align: center;
+    padding: 0 1rem;
+}

@@ -21,7 +21,16 @@ a {
 }
 
 .main-container {
-    height: calc(100% - 100px);
+    height: 100vh;
     max-width: 1920px;
     width: 100%;
+    overflow-x: auto;
+    background-size: cover;
+    background-position: 50%;
+    background-image: url("https://trello-backgrounds.s3.amazonaws.com/SharedBackground/2386x1600/47f09f0e3910259568294477d0bdedac/photo-1576502200916-3808e07386a5.jpg");
 }
+
+.content {
+    height: 100%;
+}
+

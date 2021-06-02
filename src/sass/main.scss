@@ -1,3 +1,10 @@
 @import 'helpers/reset.css';
 @import 'helpers/variables';
 @import 'helpers/mixins';
+
+
+@import "base/base";
+
+// components
+@import "components/button";
+@import "components/header";
