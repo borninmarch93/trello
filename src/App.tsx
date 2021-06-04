@@ -1,20 +1,13 @@
 import React from "react";
 import './sass/main.scss';
-import Button from "./components/Button";
+import Header from "./components/Header";
+import Board from "./modules/Board";
 
 const App: React.FC = () => {
   return (
     <div className="main-container">
-        <div className="header">
-            <Button>Boards</Button>
-            <h2>Trello</h2>
-            <div>user</div>
-        </div>
-        <main className="content">
-            <div className="container">
-
-            </div>
-        </main>
+        <Header />
+        <Board />
     </div>
   );
 }
