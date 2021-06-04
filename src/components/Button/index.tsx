@@ -4,18 +4,21 @@ import React from "react";
 interface ButtonProps {
     onClick?: () => void,
     id?: string | undefined,
-    type?: 'button' | 'submit' | 'reset' | undefined
-}
+    type?: 'button' | 'submit' | 'reset' | undefined,
+    variant?: 'primary' | string
+ }
 
 const Button: React.FC<ButtonProps> = (
     { onClick,
         id,
         type,
+        variant,
         children
     }) => {
 
     const classes = classNames(
-        'btn'
+        'btn',
+        variant === 'primary' && 'btn--primary'
     )
 
     return (

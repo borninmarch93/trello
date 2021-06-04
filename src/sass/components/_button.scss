@@ -1,3 +1,28 @@
+button {
+    box-shadow: none;
+    border: none;
+    color: #fff;
+    outline: 0;
+}
+
 .btn {
-    padding: 10px;
+    cursor: pointer;
+    min-height: 32px;
+    border-radius: 3px;
+    padding: 6px 12px;
+    height: 32px;
+    margin-top: 0;
+    margin-right: 10px;
+    @include m(primary) {
+        background-color: #0079bf;
+        &:hover {
+            background-color: #055a8c;
+        }
+    }
+    .fa-times {
+        color: black;
+        height: 20px;
+        line-height: 20px;
+        width: 20px;
+    }
 }

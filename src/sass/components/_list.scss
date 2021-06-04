@@ -1,0 +1,72 @@
+.list {
+    background-color: #ebecf0;
+    border-radius: 3px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    max-height: 100%;
+    position: relative;
+    white-space: normal;
+    padding: 10px 8px 8px;
+    @include e(header) {
+        flex: 0 0 auto;
+        position: relative;
+        min-height: 20px;
+        padding-bottom: 8px;
+        h2 {
+            font-size: 14px;
+        }
+    }
+    @include e(link) {
+        @include flexbox;
+        color: #5e6c84;
+        cursor: pointer;
+        padding: 0 8px;
+        margin: 2px 0 8px 0;
+        a {
+            padding: 8px 2px;
+            width: 100%;
+        }
+        & > :hover {
+            background-color: rgba(9, 30, 66, .08);
+        }
+    }
+    @include e(content) {
+        min-height: 38px;
+        max-height: 38px;
+        display: flex;
+        justify-content: space-between;
+    }
+    textarea {
+        background-color: #fff;
+        border-radius: 3px;
+        box-shadow: 0 1px 0 rgb(9 30 66 / 25%);
+        cursor: pointer;
+        display: block;
+        border: none;
+        margin-bottom: 8px;
+        height: 66px;
+        max-width: 250px;
+        width: 250px;
+        min-height: 20px;
+        text-decoration: none;
+    }
+    @include e(textarea) {
+        padding: 2px 0;
+        textarea::placeholder {
+            color: #5e6c84;
+            font-family: sans-serif;
+            padding: 5px;
+        }
+    }
+}
+
+.list-wrapper {
+    width: 272px;
+    margin: 0 4px;
+    height: 100%;
+    box-sizing: border-box;
+    display: inline-block;
+    vertical-align: top;
+    white-space: nowrap;
+}

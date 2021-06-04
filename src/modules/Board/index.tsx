@@ -7,7 +7,7 @@ const Board: React.FC = () => {
         <main className="content">
             <div className="container">
                 <div className="board">
-                   <List />
+                    <List />
                     <NewList />
                 </div>
             </div>

@@ -14,6 +14,11 @@ html {
 
 body {
     background-color: white;
+    font-family: sans-serif;
+}
+
+body, button, html, input, select, textarea {
+    font-size: 14px;
 }
 
 a {
@@ -27,7 +32,7 @@ a {
     overflow-x: auto;
     background-size: cover;
     background-position: 50%;
-    background-image: url("https://trello-backgrounds.s3.amazonaws.com/SharedBackground/2386x1600/47f09f0e3910259568294477d0bdedac/photo-1576502200916-3808e07386a5.jpg");
+    background-image: url("https://trello-backgrounds.s3.amazonaws.com/SharedBackground/1440x1920/46a110d9097386018f38bec44a8bb79f/photo-1622630395351-24d5917c1c1f.jpg");
 }
 
 .content {
