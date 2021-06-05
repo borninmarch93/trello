@@ -4,9 +4,14 @@ import Button from "../Button";
 const Header: React.FC = () => {
     return (
         <div className="header">
-            <Button>Boards</Button>
+            <Button variant="transparent">Boards</Button>
             <h2>Trello</h2>
-            <div><Button>+</Button>user</div>
+            <div>
+                <Button variant="transparent">
+                    +
+                </Button>
+                user
+            </div>
         </div>
     )
 }

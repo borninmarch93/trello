@@ -31,6 +31,13 @@
             background-color: rgba(9, 30, 66, .08);
         }
     }
+    @include m(add) {
+        order: 2;
+    }
+    @include m(added) {
+        order: 1;
+    }
+
     @include e(content) {
         min-height: 38px;
         max-height: 38px;
@@ -41,22 +48,23 @@
         background-color: #fff;
         border-radius: 3px;
         box-shadow: 0 1px 0 rgb(9 30 66 / 25%);
-        cursor: pointer;
         display: block;
         border: none;
         margin-bottom: 8px;
-        height: 66px;
-        max-width: 250px;
+        height: 60px;
+        max-width: 240px;
         width: 250px;
+        padding: 8px;
         min-height: 20px;
         text-decoration: none;
+        &:focus-visible {
+            outline: none;
+        }
     }
     @include e(textarea) {
-        padding: 2px 0;
         textarea::placeholder {
             color: #5e6c84;
             font-family: sans-serif;
-            padding: 5px;
         }
     }
 }

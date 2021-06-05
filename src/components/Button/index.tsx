@@ -18,7 +18,8 @@ const Button: React.FC<ButtonProps> = (
 
     const classes = classNames(
         'btn',
-        variant === 'primary' && 'btn--primary'
+        variant === 'primary' && 'btn--primary',
+        variant === 'transparent' && 'btn--transparent'
     )
 
     return (

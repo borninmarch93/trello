@@ -1,0 +1,11 @@
+.card {
+    @include flexbox;
+    color: #172b4d;
+    box-shadow: 0 1px 0 rgb(9 30 66 / 25%);
+    align-items: center;
+    border-radius: 3px;
+    background-color: white;
+    padding: 2px 8px;
+    height: 32px;
+    margin-bottom: 1rem;
+}
