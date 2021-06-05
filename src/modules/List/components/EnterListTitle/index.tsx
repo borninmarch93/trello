@@ -6,7 +6,7 @@ import { faTimes } from "@fortawesome/free-solid-svg-icons";
 
 interface EnterListTitleProps {
     onClose: () => void
-    onAddNewList: (newListTitle: string) => void
+    onAddNewList: (title: string) => void
 }
 
 const EnterListTitle: React.FC<EnterListTitleProps> = ({ onClose, onAddNewList }) => {
@@ -18,9 +18,7 @@ const EnterListTitle: React.FC<EnterListTitleProps> = ({ onClose, onAddNewList }
     }
 
     const addNewListHandler = () => {
-        if (onAddNewList) {
-            onAddNewList(title);
-        }
+        onAddNewList(title);
         setTitle('');
     }
 
