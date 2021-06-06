@@ -1,6 +1,7 @@
 .card {
     @include flexbox;
     color: #172b4d;
+    cursor: pointer;
     box-shadow: 0 1px 0 rgb(9 30 66 / 25%);
     align-items: center;
     border-radius: 3px;

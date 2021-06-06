@@ -3,10 +3,11 @@ import EnterCardTitle from "../EnterCardTitle";
 import AddCardButton from "../AddCardButton";
 
 interface AddCardProps {
-    onAddNewCard: (title: string) => void
+    onAddNewCard: (title: string) => void,
+    isFirstCard: boolean
 }
 
-const AddCard: React.FC<AddCardProps> = ({ onAddNewCard }) => {
+const AddCard: React.FC<AddCardProps> = ({ onAddNewCard, isFirstCard }) => {
     const [active, setActive] = useState(false);
 
     const closeHandler = () => {
@@ -22,7 +23,7 @@ const AddCard: React.FC<AddCardProps> = ({ onAddNewCard }) => {
             {active && <EnterCardTitle
                 onAddNewCard={onAddNewCard}
                 onClose={closeHandler}/>}
-            {!active && <AddCardButton onClick={openHandler} />}
+            {!active && <AddCardButton isFirstCard={isFirstCard} onClick={openHandler} />}
         </React.Fragment>
     )
 }
