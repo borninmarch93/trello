@@ -28,7 +28,7 @@ const Card: React.FC<CardProps> = ({ title, list }) => {
             <div className='card' onClick={() => setShow(true)}>
                 {title}
             </div>
-            <Modal size="lg" modalHeader={true} show={show} onClose={() => setShow(false)} title="card">
+            <Modal size="lg" show={show} onClose={() => setShow(false)} title="card">
                 <Modal.Header>
                     <Grid row className="modal__header">
                         <Grid column={true} lg={12}>

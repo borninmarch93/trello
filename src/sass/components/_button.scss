@@ -25,6 +25,10 @@ button {
         background-color: rgba(255, 255, 255, 0.3);
         padding: 6px 12px;
     }
+    @include m(shadowed) {
+        background-color: rgba(9,30,66,.04);
+        padding: 6px 12px;
+    }
     .fa-times {
         color: black;
         height: 20px;

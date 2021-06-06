@@ -18,7 +18,7 @@ const Board: React.FC = () => {
             <div className="container">
                 <div className="board">
                     {lists && lists.map((list, i) => {
-                        return <List key={i} title={list.title} />
+                        return <List key={i} listTitle={list.title} />
                     })}
                     <AddList onAddNewList={addNewListHandler} />
                 </div>

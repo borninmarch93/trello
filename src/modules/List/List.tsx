@@ -3,27 +3,27 @@ import AddCard from "../Card/components/AddCard";
 import Card, { CardProps } from "../Card";
 
 interface ListProps {
-    title: string
+    listTitle: string
 }
 
-const List: React.FC<ListProps> = ({ title }) => {
+const List: React.FC<ListProps> = ({ listTitle }) => {
     const [cards, setCards] = useState<CardProps[]>([])
 
     const addNewCardHandler = (title: string) => {
-        setCards([...cards, { title }])
+        setCards([...cards, { title, list: listTitle }])
     }
 
     return (
         <div className="list-wrapper">
             <div className="list">
                 <div className="list__header">
-                    <h2>{title}</h2>
+                    <h2>{listTitle}</h2>
                 </div>
                 {cards && cards.map((card, index) => {
-                    return <Card key={index} title={card.title} />
+                    return <Card key={index} title={card.title}  list={listTitle} />
                 })}
                 <div>
-                    <AddCard onAddNewCard={addNewCardHandler}/>
+                    <AddCard isFirstCard={cards.length === 0} onAddNewCard={addNewCardHandler}/>
                 </div>
             </div>
         </div>

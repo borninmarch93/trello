@@ -14,11 +14,12 @@ html {
 
 body {
     background-color: white;
-    font-family: sans-serif;
+    font-family: $FONT_LATO_REGULAR;
 }
 
-body, button, html, input, select, textarea {
+body, button, html, input, select, textarea, p {
     font-size: 14px;
+    color: #172b4d;
 }
 
 a {
@@ -39,3 +40,6 @@ a {
     height: 100%;
 }
 
+::-webkit-scrollbar {
+    display: none;
+}

@@ -1,0 +1,15 @@
+.avatar {
+    @include flexbox;
+    align-items: center;
+    justify-content: center;
+    border-radius: 100%;
+    background-color: #dfe1e6;
+    height: 32px;
+    width: 32px;
+    font-size: 12px;
+    color: #172b4d;
+    font-weight: 700;
+    &:hover {
+        background-color: #c1c7d0;
+    }
+}

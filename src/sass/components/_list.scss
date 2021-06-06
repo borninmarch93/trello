@@ -37,7 +37,6 @@
     @include m(added) {
         order: 1;
     }
-
     @include e(content) {
         min-height: 38px;
         max-height: 38px;
@@ -77,4 +76,7 @@
     display: inline-block;
     vertical-align: top;
     white-space: nowrap;
+    .btn {
+        margin-right: 0;
+    }
 }
