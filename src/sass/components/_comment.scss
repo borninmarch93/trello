@@ -1,0 +1,54 @@
+.comment {
+    @include flexbox;
+    align-items: baseline;
+    width: 100%;
+    @include e(avatar-container) {
+        padding-left: 12px;
+        padding-right: 8px;
+    }
+    @include e(textarea) {
+        width: 100%;
+        .textarea {
+            width: 92%;
+            max-width: 100%;
+            resize: none;
+        }
+    }
+    @include m(show) {
+        & > :first-child {
+            align-items: center;
+            p {
+                margin-right: 10px;
+                color: #42526e;
+                font-weight: 700;
+            }
+        }
+    }
+    @include e(owner) {
+        @include flexbox;
+        align-items: center;
+        span {
+            color: #5e6c84;
+            font-size: 12px;
+            &:hover {
+                text-decoration: underline;
+            }
+        }
+    }
+    @include e(item) {
+        background-color: white;
+        border-radius: 3px;
+        box-shadow: 0 1px 2px -1px rgb(9 30 66 / 25%), 0 0 0 1px rgb(9 30 66 / 8%);
+        padding: 8px 12px;
+        text-overflow: ellipsis;
+        line-height: 20px;
+        margin-left: 4rem;
+    }
+    @include e(btn) {
+        .btn {
+            color: white;
+        }
+        margin-left: 4rem;
+        margin-bottom: 2rem;
+    }
+}
