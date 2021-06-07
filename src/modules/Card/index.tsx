@@ -5,23 +5,31 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faComment } from "@fortawesome/free-solid-svg-icons";
 import Feed from "../Feed";
 import { faCreditCard } from "@fortawesome/free-solid-svg-icons/faCreditCard";
+import { useDispatch, useSelector } from "react-redux";
+import { commentAdded, CommentsState } from "../../store/reducers/comments";
 
 export interface CardProps {
-    title: string,
-    list: string
+    id: number,
+    list: string,
+    title: string
 }
 
-const comments = [
-    {
-        createdAt: new Date(),
-        text: 'hello world',
-        firstName: 'Vedrana',
-        lastName: 'Bradasevic'
-    }
-]
-
-const Card: React.FC<CardProps> = ({ title, list }) => {
+const Card: React.FC<CardProps> = ({ id, title, list }) => {
+    const dispatch = useDispatch();
     const [show, setShow] = useState(false);
+
+    const comments = useSelector((state: CommentsState) => {
+        return state.comments.filter(comment => comment.cardId === id)
+    })
+
+    const onAddCommentHandler = (comment: string) => {
+        dispatch(commentAdded({
+            firstName: 'Vedrana',
+            lastName: 'Bradasevic',
+            text: comment,
+            cardId: id
+        }))
+    }
 
     return (
         <React.Fragment>
@@ -53,7 +61,7 @@ const Card: React.FC<CardProps> = ({ title, list }) => {
                             </div>
                         </Grid>
                     </Grid>
-                    <Feed comments={comments} />
+                    <Feed comments={comments} onAdd={onAddCommentHandler}/>
                 </Modal.Body>
             </Modal>
         </React.Fragment>

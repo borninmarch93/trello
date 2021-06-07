@@ -76,6 +76,8 @@
     display: inline-block;
     vertical-align: top;
     white-space: nowrap;
+    max-height: 600px;
+    overflow-y: scroll;
     .btn {
         margin-right: 0;
     }

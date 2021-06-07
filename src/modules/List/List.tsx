@@ -1,31 +1,50 @@
-import React, { useState } from "react";
+import React from "react";
 import AddCard from "../Card/components/AddCard";
-import Card, { CardProps } from "../Card";
+import Card from "../Card";
+import { useDispatch, useSelector } from "react-redux";
+import { ListsState } from "../../store/reducers/lists";
+import { cardAdded, CardsState } from "../../store/reducers/cards";
 
 interface ListProps {
-    listTitle: string
+    id: number
 }
 
-const List: React.FC<ListProps> = ({ listTitle }) => {
-    const [cards, setCards] = useState<CardProps[]>([])
+const List: React.FC<ListProps> = ({ id }) => {
+    const dispatch = useDispatch();
+
+    const list = useSelector((state: ListsState) => {
+        return state.lists.find(list => list.id === id)
+    })
+
+    const cards = useSelector((state: CardsState) => {
+        return state.cards.filter(card => card.listId === id);
+    })
 
     const addNewCardHandler = (title: string) => {
-        setCards([...cards, { title, list: listTitle }])
+        dispatch(cardAdded({
+            title,
+            listId: id
+        }))
     }
 
     return (
         <div className="list-wrapper">
+            {list &&
             <div className="list">
                 <div className="list__header">
-                    <h2>{listTitle}</h2>
+                    <h2>{list.title}</h2>
                 </div>
                 {cards && cards.map((card, index) => {
-                    return <Card key={index} title={card.title}  list={listTitle} />
+                    return <Card
+                        key={index}
+                        title={card.title}
+                        list={list.title}
+                        id={card.id}/>
                 })}
                 <div>
                     <AddCard isFirstCard={cards.length === 0} onAddNewCard={addNewCardHandler}/>
                 </div>
-            </div>
+            </div>}
         </div>
     )
 }

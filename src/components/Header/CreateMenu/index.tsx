@@ -6,6 +6,8 @@ import React, { useState } from "react";
 import Modal from "../../Modal";
 import Input from "../../Input";
 import Button from "../../Button";
+import { useDispatch } from "react-redux";
+import { boardAdded } from "../../../store/reducers/boards";
 
 interface CreateMenuProps {
     show: boolean,
@@ -13,12 +15,21 @@ interface CreateMenuProps {
 }
 
 const CreateMenu: React.FC<CreateMenuProps> = ({ show, onClose }) => {
+    const dispatch = useDispatch();
     const [showModal, setShowModal] = useState(false);
     const [board, setBoard] = useState('');
 
     const textHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
         const { value } = event.target;
         setBoard(value);
+    }
+
+    const addBoardHandler = () => {
+        dispatch(boardAdded({
+            title: board
+        }))
+        setShowModal(false);
+        setBoard('');
     }
 
     return (
@@ -40,12 +51,14 @@ const CreateMenu: React.FC<CreateMenuProps> = ({ show, onClose }) => {
                 show={showModal}
                 onClose={() => setShowModal(false)}
                 title="">
-                <Input
-                    placeholder="Add board title"
-                    onChange={textHandler}
-                    type="text"
-                    value={board}/>
-                <Button variant="shadowed">Create Board</Button>
+                <Modal.Body>
+                    <Input
+                        placeholder="Add board title"
+                        onChange={textHandler}
+                        type="text"
+                        value={board}/>
+                    <Button onClick={addBoardHandler} variant="shadowed">Create Board</Button>
+                </Modal.Body>
             </Modal>
         </PopoverMenu>
     )

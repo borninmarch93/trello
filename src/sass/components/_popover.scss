@@ -4,6 +4,7 @@
     background-color: white;
     height: 300px;
     box-sizing: border-box;
+    z-index: 10;
     @include e(header) {
         font-weight: 400;
         border-bottom: 1px solid rgba(9, 30, 66, 0.13);
@@ -18,8 +19,33 @@
             cursor: pointer;
         }
     }
+    @include m(left) {
+        left: 4px;
+    }
     @include e(body) {
         margin-top: 10px;
+        color: #5E6C84;
+    }
+    @include e(boards) {
+        @include flexbox;
+        flex-direction: column;
+        margin: 8px 4px 8px 8px;
+    }
+    @include e(board) {
+        @include flexbox;
+        align-items: center;
+        justify-content: flex-start;
+        font-weight: 700;
+        height: 36px;
+        overflow: hidden;
+        padding: 5px;
+        box-sizing: border-box;
+        border-radius: 3px;
+        width: 100%;
+        cursor: pointer;
+        &:hover {
+            background-color: #c1c7d0;
+        }
     }
     @include e(item) {
         color: #5E6C84;

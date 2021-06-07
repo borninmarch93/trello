@@ -11,4 +11,15 @@
     .avatar {
         cursor: pointer;
     }
+    & > div {
+        width: 100%;
+        & > :nth-child(1) {
+            @include flexbox;
+            justify-content: flex-start;
+        }
+        & > :nth-child(3) {
+            @include flexbox;
+            justify-content: flex-end;
+        }
+    }
 }

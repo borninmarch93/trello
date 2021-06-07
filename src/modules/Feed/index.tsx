@@ -2,11 +2,15 @@ import React from "react";
 import AddComment from "../Comment/components/AddComment";
 import CommentList, { CommentListProps } from "../Comment/components/CommentList";
 
-const Feed: React.FC<CommentListProps> = ({ comments }) => {
+interface FeedProps {
+    onAdd: (comment: string) => void
+}
+
+const Feed: React.FC<CommentListProps & FeedProps>= ({ comments, onAdd }) => {
 
     return (
        <React.Fragment>
-           <AddComment />
+           <AddComment  onAdd={onAdd}/>
            <CommentList comments={comments}/>
        </React.Fragment>
     )

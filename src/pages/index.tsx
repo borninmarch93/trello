@@ -6,7 +6,7 @@ const Dashboard: React.FC = () => {
     return (
         <div className="main-container">
             <Header />
-            <Board />
+            <Board id={1}/>
         </div>
     )
 }
