@@ -11,6 +11,7 @@ const CommentList: React.FC<CommentListProps> = ({ comments }) => {
             {comments && comments.map((comment, index) => {
                 return <Comment
                     key={index}
+                    id={comment.id}
                     createdAt={comment.createdAt}
                     firstName={comment.firstName}
                     lastName={comment.lastName}

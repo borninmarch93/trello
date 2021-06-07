@@ -28,10 +28,22 @@ const slice = createSlice({
                 id: Math.random() * 1000,
                 title
             })
+        },
+        boardUpdated: (boards, action) => {
+            const { id, title } = action.payload;
+            const boardIndex = boards.findIndex(board => board.id === id);
+            if (boardIndex !== -1) {
+                boards[boardIndex].title = title;
+            }
+        },
+        boardArchived: (boards, action) => {
+            const { id } = action.payload;
+            const boardIndex = boards.findIndex(board => board.id === id);
+            boards.splice(boardIndex, 1);
         }
     }
 })
 
-export const { boardAdded } = slice.actions;
+export const { boardAdded, boardUpdated, boardArchived } = slice.actions;
 
 export default slice.reducer;

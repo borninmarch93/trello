@@ -52,10 +52,22 @@ const slice = createSlice({
                 listId,
                 title
             })
+        },
+        cardUpdated: (cards, action) => {
+            const { id, title } = action.payload;
+            const cardIndex = cards.findIndex(card => card.id === id);
+            if (cardIndex !== -1) {
+                cards[cardIndex].title = title;
+            }
+        },
+        cardArchived: (cards, action) => {
+            const { id } = action.payload;
+            const cardIndex = cards.findIndex(card => card.id === id);
+            cards.splice(cardIndex, 1);
         }
     }
 })
 
-export const { cardAdded } = slice.actions;
+export const { cardAdded, cardUpdated, cardArchived } = slice.actions;
 
 export default slice.reducer;

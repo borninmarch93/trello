@@ -3,7 +3,7 @@ import React from "react";
 interface TextareaProps {
     value: string | number,
     onChange: (event: any) => void,
-    placeholder: string
+    placeholder?: string
 }
 
 const Textarea: React.FC<TextareaProps> = ({ placeholder, value, onChange }) => {

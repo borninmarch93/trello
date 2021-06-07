@@ -5,7 +5,7 @@ export interface Comment {
     cardId: number,
     firstName: string,
     lastName: string,
-    createdAt: Date,
+    createdAt: string,
     text: string
 }
 
@@ -21,7 +21,7 @@ const slice = createSlice({
             cardId: 1,
             firstName: 'Vedrana',
             lastName: 'Bradasevic',
-            createdAt: new Date(),
+            createdAt: new Date().toDateString(),
             text: 'comment'
         },
         {
@@ -29,7 +29,7 @@ const slice = createSlice({
             cardId: 2,
             firstName: 'Vedrana',
             lastName: 'Bradasevic',
-            createdAt: new Date(),
+            createdAt: new Date().toDateString(),
             text: 'comment'
         },
         {
@@ -37,7 +37,7 @@ const slice = createSlice({
             cardId: 2,
             firstName: 'Pero',
             lastName: 'Peric',
-            createdAt: new Date(),
+            createdAt: new Date().toDateString(),
             text: 'xaxaxaxa'
         },
         {
@@ -45,7 +45,7 @@ const slice = createSlice({
             cardId: 3,
             firstName: 'Vedrana',
             lastName: 'Bradasevic',
-            createdAt: new Date(),
+            createdAt: new Date().toDateString(),
             text: 'jjuujujujju'
         },
         {
@@ -53,7 +53,7 @@ const slice = createSlice({
             cardId: 3,
             firstName: 'Vedrana',
             lastName: 'Bradasevic',
-            createdAt: new Date(),
+            createdAt: new Date().toDateString(),
             text: 'lalalalla'
         }
     ],
@@ -64,14 +64,24 @@ const slice = createSlice({
                 id: Math.random() * 1000,
                 cardId,
                 text,
-                createdAt: new Date(),
+                createdAt: new Date().toDateString(),
                 lastName,
                 firstName
             })
-        }
+        },
+        commentUpdated: (comments, action) => {
+            const { id, text } = action.payload;
+            const index = comments.findIndex(comment => comment.id === id);
+            comments[index].text = text;
+        },
+        commentRemoved: (comments, action) => {
+            const { id } = action.payload;
+            const index = comments.findIndex(comment => comment.id === id);
+            comments.splice(index, 1);
+        },
     }
 })
 
-export const { commentAdded } = slice.actions;
+export const { commentAdded, commentUpdated, commentRemoved } = slice.actions;
 
 export default slice.reducer;

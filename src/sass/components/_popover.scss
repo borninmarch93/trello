@@ -34,7 +34,7 @@
     @include e(board) {
         @include flexbox;
         align-items: center;
-        justify-content: flex-start;
+        justify-content: space-between;
         font-weight: 700;
         height: 36px;
         overflow: hidden;

@@ -42,10 +42,22 @@ const slice = createSlice({
                 boardId,
                 title
             })
-        }
+        },
+        listUpdated: (lists, action) => {
+            const { id, title } = action.payload;
+            const listIndex = lists.findIndex(list => list.id === id);
+            if (listIndex !== -1) {
+                lists[listIndex].title = title;
+            }
+        },
+        listArchived: (lists, action) => {
+            const { id } = action.payload;
+            const listIndex = lists.findIndex(list => list.id === id);
+            lists.splice(listIndex, 1);
+        },
     }
 })
 
-export const { listAdded } = slice.actions;
+export const { listAdded, listUpdated, listArchived } = slice.actions;
 
 export default slice.reducer;

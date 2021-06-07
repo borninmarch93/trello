@@ -3,19 +3,34 @@ import Button from "../Button";
 import Avatar from "../Avatar";
 import Grid from "../Grid";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPlus } from "@fortawesome/free-solid-svg-icons";
+import { faArchive, faPlus } from "@fortawesome/free-solid-svg-icons";
 import AccountPopover from "./AccountPopover";
 import CreateMenu from "./CreateMenu";
 import PopoverMenu from "../PopoverMenu";
-import { useSelector } from "react-redux";
-import { Board, BoardsState } from "../../store/reducers/boards";
+import { useDispatch, useSelector } from "react-redux";
+import { Board, boardArchived, BoardsState, boardUpdated } from "../../store/reducers/boards";
+import EditableField from "../EditableField";
 
 const Header: React.FC = () => {
+    const dispatch = useDispatch();
     const [showAccount, setShowAccount] = useState(false);
     const [showBoard, setShowBoard] = useState(false);
     const [showBoards, setShowBoards] = useState(false);
 
     const boards: Board[] = useSelector((state: BoardsState) => state.boards);
+
+    const handleArchiveBoard = (event: any, id: number) => {
+      event.stopPropagation();
+      dispatch(boardArchived({ id }))
+    }
+
+    const handleUpdateBoard = (id: number, title: string) => {
+        dispatch(boardUpdated({ id, title }))
+    }
+
+    const handleBoardChange = () => {
+        console.log('b')
+    }
 
     return (
         <div className="header">
@@ -30,7 +45,19 @@ const Header: React.FC = () => {
                         show={showBoards}>
                         <div className="popover__boards">
                             {boards && boards.map((board: any, index: any) => {
-                                return <div className="popover__board" key={index}>{board.title}</div>
+                                return <div
+                                    onClick={handleBoardChange}
+                                    className="popover__board"
+                                    key={index}>
+                                    <EditableField
+                                        value={board.title}
+                                        renderValue={(value) => <span>{value}</span>}
+                                        onSubmit={(value) => handleUpdateBoard(board.id, value)} />
+                                    <Button variant="transparent" onClick={
+                                        (event) => handleArchiveBoard(event, board.id)}>
+                                        <FontAwesomeIcon icon={faArchive}/>
+                                    </Button>
+                                </div>
                             })}
                         </div>
                     </PopoverMenu>

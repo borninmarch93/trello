@@ -22,11 +22,13 @@ const Modal: React.FC<ModalProps> & ModalSubcomponents = ({ onClose, size, show,
     )
 
     return (
-        <div style={{ display: show ? 'flex' : 'none'}} className="modal" onClick={onClose}>
-            <div className={classes} onClick={e => e.stopPropagation()}>
-                {children}
-            </div>
-        </div>
+        <React.Fragment>
+            {show && <div className="modal" onClick={onClose}>
+                <div className={classes} onClick={e => e.stopPropagation()}>
+                    {children}
+                </div>
+            </div>}
+        </React.Fragment>
     )
 }
 

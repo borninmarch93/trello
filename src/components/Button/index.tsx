@@ -1,8 +1,8 @@
 import classNames from "classnames";
-import React from "react";
+import React, { MouseEventHandler } from "react";
 
 interface ButtonProps {
-    onClick?: () => void,
+    onClick?: MouseEventHandler<HTMLButtonElement>,
     id?: string | undefined,
     type?: 'button' | 'submit' | 'reset' | undefined,
     variant?: 'primary' | string

@@ -6,7 +6,28 @@
     align-items: center;
     border-radius: 3px;
     background-color: white;
+    justify-content: space-between;
     padding: 2px 8px;
     height: 32px;
     margin-bottom: 1rem;
+    @include e(title) {
+        width: 100%;
+    }
+    .popover {
+        display: none;
+    }
+    &:hover {
+        .btn {
+            background-color: #5e6c84;
+            display: block;
+        }
+    }
+    @include e(popover) {
+        .btn {
+            background: rgba(0,0,0,.6);
+            border-radius: 3px;
+            clear: both;
+            color: #e6e6e6;
+        }
+    }
 }
