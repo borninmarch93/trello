@@ -3,7 +3,7 @@ import AddCard from "../Card/components/AddCard";
 import Card from "../Card";
 import { useDispatch, useSelector } from "react-redux";
 import { getListById, listArchived, listUpdated } from "../../store/reducers/lists";
-import { cardAdded, getCardsByListId } from "../../store/reducers/cards";
+import { addCard, getCardsByListId } from "../../store/reducers/cards";
 import EditableField from "../../components/EditableField";
 import Button from "../../components/Button";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -15,16 +15,14 @@ interface ListProps {
 
 const List: React.FC<ListProps> = ({ id }) => {
     const dispatch = useDispatch();
-
     const list = useSelector(getListById(id));
-
     const cards = useSelector(getCardsByListId(id));
 
     const addNewCardHandler = (title: string) => {
-        dispatch(cardAdded({
-            title,
-            listId: id
-        }))
+        if (title.length < 1) {
+            return;
+        }
+        dispatch(addCard(id, title));
     }
 
     const handleUpdateList = (value: string) => {

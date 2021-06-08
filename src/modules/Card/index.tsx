@@ -9,7 +9,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { addComment, fetchCommentsByCardId, getCommentsByCardId } from "../../store/reducers/comments";
 import Button from "../../components/Button";
 import EditableField from "../../components/EditableField";
-import { cardArchived, cardUpdated } from "../../store/reducers/cards";
+import { removeCard, updateCard } from "../../store/reducers/cards";
 
 export interface CardProps {
     id: string,
@@ -25,7 +25,6 @@ const Card: React.FC<CardProps> = ({ id, title, list }) => {
         dispatch(fetchCommentsByCardId(id));
     }, []);
 
-
     const comments = useSelector(getCommentsByCardId(id));
 
     const onAddCommentHandler = (comment: string) => {
@@ -33,11 +32,11 @@ const Card: React.FC<CardProps> = ({ id, title, list }) => {
     }
 
     const editTitleHandler = (value: string) => {
-        dispatch(cardUpdated({ id, title: value }))
+        dispatch(updateCard(id, value));
     }
 
     const archiveCard = () => {
-        dispatch(cardArchived({ id }))
+        dispatch(removeCard(id));
     }
 
     return (

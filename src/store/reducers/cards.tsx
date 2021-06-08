@@ -18,19 +18,24 @@ const slice = createSlice({
     initialState: [] as Card[],
     reducers: {
         cardAdded: (cards, action) => {
-            const { title, listId, boardId } = action.payload;
-            cards.push({
-                id: '',
-                listId,
-                boardId,
-                title
-            })
+            const card = action.payload;
+            const mappedCard = {
+                id: card.id,
+                listId: card.idList,
+                boardId: card.idBoard,
+                title: card.name
+            }
+           cards.push(mappedCard);
         },
         cardUpdated: (cards, action) => {
-            const { id, title } = action.payload;
-            const cardIndex = cards.findIndex(card => card.id === id);
+            const card = action.payload;
+            const mappedCard = {
+                id: card.id,
+                title: card.name
+            }
+            const cardIndex = cards.findIndex(card => card.id === mappedCard.id);
             if (cardIndex !== -1) {
-                cards[cardIndex].title = title;
+                cards[cardIndex].title = mappedCard.title;
             }
         },
         cardArchived: (cards, action) => {
@@ -59,6 +64,21 @@ export const { cardAdded, cardUpdated, cardArchived, cardReceived } = slice.acti
 export const fetchCardsByBoardId = (boardId: string) => {
     const url = `${process.env.REACT_APP_API_HOST}/1/boards/${boardId}/cards?key=${process.env.REACT_APP_API_KEY}&token=${process.env.REACT_APP_TOKEN}`;
     return apiCallBegan({ url, onSuccess: cardReceived.type })
+}
+
+export const addCard = (listId: string, title: string) => {
+    const url = `${process.env.REACT_APP_API_HOST}/1/cards?key=${process.env.REACT_APP_API_KEY}&token=${process.env.REACT_APP_TOKEN}&idList=${listId}&name=${title}`;
+    return apiCallBegan({ url, method: 'POST', onSuccess: cardAdded.type })
+}
+
+export const updateCard = (cardId: string, title: string) => {
+    const url = `${process.env.REACT_APP_API_HOST}/1/cards/${cardId}?key=${process.env.REACT_APP_API_KEY}&token=${process.env.REACT_APP_TOKEN}&name=${title}`;
+    return apiCallBegan({ url, method: 'PUT', onSuccess: cardUpdated.type })
+}
+
+export const removeCard = (cardId: string) => {
+    const url = `${process.env.REACT_APP_API_HOST}/1/cards/${cardId}?key=${process.env.REACT_APP_API_KEY}&token=${process.env.REACT_APP_TOKEN}`;
+    return apiCallBegan({ url, method: 'DELETE', onSuccess: cardArchived.type })
 }
 
 // Selectors
