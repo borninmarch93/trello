@@ -7,7 +7,7 @@ import Modal from "../../Modal";
 import Input from "../../Input";
 import Button from "../../Button";
 import { useDispatch } from "react-redux";
-import { boardAdded } from "../../../store/reducers/boards";
+import { addBoard } from "../../../store/reducers/boards";
 
 interface CreateMenuProps {
     show: boolean,
@@ -25,9 +25,7 @@ const CreateMenu: React.FC<CreateMenuProps> = ({ show, onClose }) => {
     }
 
     const addBoardHandler = () => {
-        dispatch(boardAdded({
-            title: board
-        }))
+        dispatch(addBoard(board));
         setShowModal(false);
         setBoard('');
     }

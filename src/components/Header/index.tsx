@@ -8,7 +8,7 @@ import AccountPopover from "./AccountPopover";
 import CreateMenu from "./CreateMenu";
 import PopoverMenu from "../PopoverMenu";
 import { useDispatch, useSelector } from "react-redux";
-import { Board, boardArchived, boardUpdated, fetchBoards, getBoards } from "../../store/reducers/boards";
+import { archiveBoard, Board, fetchBoards, getBoards, updateBoard } from "../../store/reducers/boards";
 import EditableField from "../EditableField";
 
 const Header: React.FC = () => {
@@ -24,12 +24,12 @@ const Header: React.FC = () => {
     }, [])
 
     const handleArchiveBoard = (event: any, id: string) => {
-      event.stopPropagation();
-      dispatch(boardArchived({ id }))
+        event.stopPropagation();
+        dispatch(archiveBoard(id));
     }
 
     const handleUpdateBoard = (id: string, title: string) => {
-        dispatch(boardUpdated({ id, title }))
+        dispatch(updateBoard(id, title));
     }
 
     const handleBoardChange = () => {
@@ -56,7 +56,7 @@ const Header: React.FC = () => {
                                     <EditableField
                                         value={board.title}
                                         renderValue={(value) => <span>{value}</span>}
-                                        onSubmit={(value) => handleUpdateBoard(board.id, value)} />
+                                        onSubmit={(value) => handleUpdateBoard(board.id, value)}/>
                                     <Button variant="transparent" onClick={
                                         (event) => handleArchiveBoard(event, board.id)}>
                                         <FontAwesomeIcon icon={faArchive}/>

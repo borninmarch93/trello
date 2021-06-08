@@ -16,17 +16,17 @@ const slice = createSlice({
     initialState: [] as Board[],
     reducers: {
         boardAdded: (boards, action) => {
-            const { title } = action.payload;
+            const { id, name } = action.payload;
             boards.push({
-                id: '',
-                title
+                id,
+                title: name
             })
         },
         boardUpdated: (boards, action) => {
-            const { id, title } = action.payload;
+            const { id, name } = action.payload;
             const boardIndex = boards.findIndex(board => board.id === id);
             if (boardIndex !== -1) {
-                boards[boardIndex].title = title;
+                boards[boardIndex].title = name;
             }
         },
         boardArchived: (boards, action) => {
@@ -35,7 +35,6 @@ const slice = createSlice({
             boards.splice(boardIndex, 1);
         },
         boardsReceived: (boards, action) => {
-            console.log('payload', action.payload);
             const responsePayload = action.payload;
             return responsePayload.map((board: any) => {
                 return {
@@ -53,6 +52,21 @@ export const { boardAdded, boardUpdated, boardsReceived, boardArchived } = slice
 export const fetchBoards = () => {
     const url = `${process.env.REACT_APP_API_HOST}/1/organizations/${process.env.REACT_APP_ORGANIZATION_ID}/boards?key=${process.env.REACT_APP_API_KEY}&token=${process.env.REACT_APP_TOKEN}`;
     return apiCallBegan({ url, onSuccess: boardsReceived.type })
+}
+
+export const addBoard = (title: string) => {
+    const url = `${process.env.REACT_APP_API_HOST}/1/boards?key=${process.env.REACT_APP_API_KEY}&token=${process.env.REACT_APP_TOKEN}&name=${title}`;
+    return apiCallBegan({ url, method: 'POST', onSuccess: boardAdded.type })
+}
+
+export const updateBoard = (boardId: string, title: string) => {
+    const url = `${process.env.REACT_APP_API_HOST}/1/boards/${boardId}?key=${process.env.REACT_APP_API_KEY}&token=${process.env.REACT_APP_TOKEN}&name=${title}`;
+    return apiCallBegan({ url, method: 'PUT', onSuccess: boardUpdated.type })
+}
+
+export const archiveBoard = (boardId: string) => {
+    const url = `${process.env.REACT_APP_API_HOST}/1/boards/${boardId}?key=${process.env.REACT_APP_API_KEY}&token=${process.env.REACT_APP_TOKEN}`;
+    return apiCallBegan({ url, method: 'DELETE', onSuccess: boardArchived.type })
 }
 
 // Selectors
