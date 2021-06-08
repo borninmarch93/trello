@@ -10,6 +10,7 @@ import PopoverMenu from "../PopoverMenu";
 import { useDispatch, useSelector } from "react-redux";
 import { archiveBoard, Board, fetchBoards, getBoards, updateBoard } from "../../store/reducers/boards";
 import EditableField from "../EditableField";
+import { fetchMember, getMember } from "../../store/reducers/members";
 
 const Header: React.FC = () => {
     const dispatch = useDispatch();
@@ -18,9 +19,11 @@ const Header: React.FC = () => {
     const [showBoards, setShowBoards] = useState(false);
 
     const boards: Board[] = useSelector(getBoards());
+    const member = useSelector(getMember());
 
     useEffect(() => {
         dispatch(fetchBoards());
+        dispatch(fetchMember());
     }, [])
 
     const handleArchiveBoard = (event: any, id: string) => {
@@ -80,7 +83,10 @@ const Header: React.FC = () => {
                         <a onClick={() => setShowAccount(!showAccount)}>
                             <Avatar username="VB"/>
                         </a>
-                        <AccountPopover show={showAccount} onClose={() => setShowAccount(false)}/>
+                        <AccountPopover
+                            show={showAccount}
+                            member={member}
+                            onClose={() => setShowAccount(false)}/>
                     </Grid>
                 </Grid>
             </Grid>
