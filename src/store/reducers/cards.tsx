@@ -1,8 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { apiCallBegan } from "../actions/api";
+import { createSelector } from "reselect";
 
 export interface Card {
-    id: number,
-    listId: number,
+    id: string,
+    listId: string,
+    boardId: string,
     title: string
 }
 
@@ -12,44 +15,14 @@ export interface CardsState {
 
 const slice = createSlice({
     name: 'cards',
-    initialState: [
-        {
-            id: 1,
-            listId: 1,
-            title: 'card1'
-        },
-        {
-            id: 2,
-            listId: 1,
-            title: 'card2'
-        },
-        {
-            id: 3,
-            listId: 2,
-            title: 'card1'
-        },
-        {
-            id: 4,
-            listId: 2,
-            title: 'card2'
-        },
-        {
-            id: 5,
-            listId: 3,
-            title: 'card1'
-        },
-        {
-            id: 6,
-            listId: 3,
-            title: 'card2'
-        }
-    ],
+    initialState: [] as Card[],
     reducers: {
         cardAdded: (cards, action) => {
-            const { title, listId } = action.payload;
+            const { title, listId, boardId } = action.payload;
             cards.push({
-                id: Math.random() * 1000,
+                id: '',
                 listId,
+                boardId,
                 title
             })
         },
@@ -64,10 +37,35 @@ const slice = createSlice({
             const { id } = action.payload;
             const cardIndex = cards.findIndex(card => card.id === id);
             cards.splice(cardIndex, 1);
+        },
+        cardReceived: (cards, action) => {
+            const responsePayload = action.payload;
+            return responsePayload.map((card: any) => {
+                return {
+                    id: card.id,
+                    boardId: card.idBoard,
+                    listId: card.idList,
+                    title: card.name
+                }
+            })
         }
     }
-})
+});
 
-export const { cardAdded, cardUpdated, cardArchived } = slice.actions;
+export const { cardAdded, cardUpdated, cardArchived, cardReceived } = slice.actions;
+
+// Action creators
+
+export const fetchCardsByBoardId = (boardId: string) => {
+    const url = `${process.env.REACT_APP_API_HOST}/1/boards/${boardId}/cards?key=${process.env.REACT_APP_API_KEY}&token=${process.env.REACT_APP_TOKEN}`;
+    return apiCallBegan({ url, onSuccess: cardReceived.type })
+}
+
+// Selectors
+
+export const getCardsByListId = (listId: string) => createSelector(
+    (state: CardsState) => state.cards,
+    cards => cards.filter(card => card.listId === listId)
+)
 
 export default slice.reducer;

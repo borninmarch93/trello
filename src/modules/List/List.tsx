@@ -2,27 +2,23 @@ import React from "react";
 import AddCard from "../Card/components/AddCard";
 import Card from "../Card";
 import { useDispatch, useSelector } from "react-redux";
-import { listArchived, ListsState, listUpdated } from "../../store/reducers/lists";
-import { cardAdded, CardsState } from "../../store/reducers/cards";
+import { getListById, listArchived, listUpdated } from "../../store/reducers/lists";
+import { cardAdded, getCardsByListId } from "../../store/reducers/cards";
 import EditableField from "../../components/EditableField";
 import Button from "../../components/Button";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArchive } from "@fortawesome/free-solid-svg-icons";
 
 interface ListProps {
-    id: number
+    id: string
 }
 
 const List: React.FC<ListProps> = ({ id }) => {
     const dispatch = useDispatch();
 
-    const list = useSelector((state: ListsState) => {
-        return state.lists.find(list => list.id === id)
-    })
+    const list = useSelector(getListById(id));
 
-    const cards = useSelector((state: CardsState) => {
-        return state.cards.filter(card => card.listId === id);
-    })
+    const cards = useSelector(getCardsByListId(id));
 
     const addNewCardHandler = (title: string) => {
         dispatch(cardAdded({

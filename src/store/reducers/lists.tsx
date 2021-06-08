@@ -1,8 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { apiCallBegan } from "../actions/api";
+import { createSelector } from "reselect";
 
 export interface List {
-    id: number,
-    boardId: number,
+    id: string,
+    boardId: string,
     title: string
 }
 
@@ -12,33 +14,12 @@ export interface ListsState {
 
 const slice = createSlice({
     name: 'lists',
-    initialState: [
-        {
-            id: 1,
-            boardId: 1,
-            title: 'list1'
-        },
-        {
-            id: 2,
-            boardId: 1,
-            title: 'list2'
-        },
-        {
-            id: 3,
-            boardId: 2,
-            title: 'list3'
-        },
-        {
-            id: 4,
-            boardId: 2,
-            title: 'list4'
-        }
-    ],
+    initialState: [] as List[],
     reducers: {
         listAdded: (lists, action) => {
-            const { title, boardId } = action.payload;
+            const {title, boardId} = action.payload;
             lists.push({
-                id: Math.random() * 1000,
+                id: '',
                 boardId,
                 title
             })
@@ -55,9 +36,37 @@ const slice = createSlice({
             const listIndex = lists.findIndex(list => list.id === id);
             lists.splice(listIndex, 1);
         },
+        listsReceived: (lists, action) => {
+            const responsePayload = action.payload;
+            return responsePayload.map((list: any) => {
+                return {
+                    id: list.id,
+                    boardId: list.idBoard,
+                    title: list.name
+                }
+            })
+        }
     }
 })
 
-export const { listAdded, listUpdated, listArchived } = slice.actions;
+export const { listAdded, listUpdated, listArchived, listsReceived } = slice.actions;
+
+
+// Action creators
+export const fetchLists = (boardId: string) => {
+    const url = `${process.env.REACT_APP_API_HOST}/1/boards/${boardId}/lists?key=${process.env.REACT_APP_API_KEY}&token=${process.env.REACT_APP_TOKEN}`;
+    return apiCallBegan({url, onSuccess: listsReceived.type})
+}
+
+// Selectors
+export const getLists = (boardId: string) => createSelector(
+    (state: ListsState) => state.lists,
+    lists => lists.filter(list => list.boardId === boardId)
+);
+
+export const getListById = (listId: string) => createSelector(
+    (state: ListsState) => state.lists,
+    lists => lists.find(list => list.id === listId)
+);
 
 export default slice.reducer;

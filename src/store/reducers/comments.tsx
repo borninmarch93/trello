@@ -1,10 +1,12 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { apiCallBegan } from "../actions/api";
+import { createSelector } from "reselect";
 
 export interface Comment {
-    id: number,
-    cardId: number,
-    firstName: string,
-    lastName: string,
+    id: string,
+    cardId: string,
+    fullName: string,
+    initials: string,
     createdAt: string,
     text: string
 }
@@ -15,73 +17,83 @@ export interface CommentsState {
 
 const slice = createSlice({
     name: 'comments',
-    initialState: [
-        {
-            id: Math.random() * 1000,
-            cardId: 1,
-            firstName: 'Vedrana',
-            lastName: 'Bradasevic',
-            createdAt: new Date().toDateString(),
-            text: 'comment'
-        },
-        {
-            id: Math.random() * 1000,
-            cardId: 2,
-            firstName: 'Vedrana',
-            lastName: 'Bradasevic',
-            createdAt: new Date().toDateString(),
-            text: 'comment'
-        },
-        {
-            id: Math.random() * 1000,
-            cardId: 2,
-            firstName: 'Pero',
-            lastName: 'Peric',
-            createdAt: new Date().toDateString(),
-            text: 'xaxaxaxa'
-        },
-        {
-            id: Math.random() * 1000,
-            cardId: 3,
-            firstName: 'Vedrana',
-            lastName: 'Bradasevic',
-            createdAt: new Date().toDateString(),
-            text: 'jjuujujujju'
-        },
-        {
-            id: Math.random() * 1000,
-            cardId: 3,
-            firstName: 'Vedrana',
-            lastName: 'Bradasevic',
-            createdAt: new Date().toDateString(),
-            text: 'lalalalla'
-        }
-    ],
+    initialState: [] as Comment[],
     reducers: {
         commentAdded: (comments, action) => {
-            const { firstName, lastName, text, cardId } = action.payload;
-            comments.push({
-                id: Math.random() * 1000,
-                cardId,
-                text,
-                createdAt: new Date().toDateString(),
-                lastName,
-                firstName
-            })
+            const comment = action.payload;
+            const mappedComment = {
+                id: comment.id,
+                cardId: comment.data.card.id,
+                fullName: comment.memberCreator.fullName,
+                initials: comment.memberCreator.initials,
+                createdAt: comment.date,
+                text: comment.data.text
+            }
+            comments.push(mappedComment);
         },
         commentUpdated: (comments, action) => {
-            const { id, text } = action.payload;
-            const index = comments.findIndex(comment => comment.id === id);
-            comments[index].text = text;
+           const comment = action.payload;
+            const mappedComment = {
+                id: comment.id,
+                cardId: comment.data.card.id,
+                fullName: comment.memberCreator.fullName,
+                initials: comment.memberCreator.initials,
+                createdAt: comment.date,
+                text: comment.data.text
+            }
+            const index = comments.findIndex(comment => comment.id === mappedComment.id);
+            comments[index] = mappedComment;
         },
         commentRemoved: (comments, action) => {
             const { id } = action.payload;
             const index = comments.findIndex(comment => comment.id === id);
             comments.splice(index, 1);
         },
+        commentReceived: (comments, action) => {
+            const responsePayload = action.payload;
+            return responsePayload.map((comment: any) => {
+                return {
+                    id: comment.id,
+                    cardId: comment.data.card.id,
+                    fullName: comment.memberCreator.fullName,
+                    initials: comment.memberCreator.initials,
+                    createdAt: comment.date,
+                    text: comment.data.text
+                }
+            })
+        }
     }
 })
 
-export const { commentAdded, commentUpdated, commentRemoved } = slice.actions;
+export const { commentAdded, commentUpdated, commentRemoved, commentReceived } = slice.actions;
+
+// Action creators
+
+export const fetchCommentsByCardId = (cardId: string) => {
+    const url = `${process.env.REACT_APP_API_HOST}/1/cards/${cardId}/actions?key=${process.env.REACT_APP_API_KEY}&token=${process.env.REACT_APP_TOKEN}&filter=commentCard`;
+    return apiCallBegan({ url, onSuccess: commentReceived.type })
+}
+
+export const addComment = (cardId: string, text: string) => {
+    const url = `${process.env.REACT_APP_API_HOST}/1/cards/${cardId}/actions/comments?key=${process.env.REACT_APP_API_KEY}&token=${process.env.REACT_APP_TOKEN}&text=${text}`;
+    return apiCallBegan({ url, method: 'POST', onSuccess: commentAdded.type })
+}
+
+export const updateComment = (commentId: string, cardId: string, text: string) => {
+    const url = `${process.env.REACT_APP_API_HOST}/1/cards/${cardId}/actions/${commentId}/comments?key=${process.env.REACT_APP_API_KEY}&token=${process.env.REACT_APP_TOKEN}&text=${text}`;
+    return apiCallBegan({ url, method: 'PUT', onSuccess: commentUpdated.type })
+}
+
+export const removeComment = (commentId: string, cardId: string) => {
+    const url = `${process.env.REACT_APP_API_HOST}/1/cards/${cardId}/actions/${commentId}/comments?key=${process.env.REACT_APP_API_KEY}&token=${process.env.REACT_APP_TOKEN}`;
+    return apiCallBegan({ url, method: 'DELETE', onSuccess: commentRemoved.type })
+}
+
+// Selectors
+
+export const getCommentsByCardId = (cardId: string) => createSelector(
+    (state: CommentsState) => state.comments,
+    comments => comments.filter(comment => comment.cardId === cardId)
+);
 
 export default slice.reducer;

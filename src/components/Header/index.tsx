@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Button from "../Button";
 import Avatar from "../Avatar";
 import Grid from "../Grid";
@@ -8,7 +8,7 @@ import AccountPopover from "./AccountPopover";
 import CreateMenu from "./CreateMenu";
 import PopoverMenu from "../PopoverMenu";
 import { useDispatch, useSelector } from "react-redux";
-import { Board, boardArchived, BoardsState, boardUpdated } from "../../store/reducers/boards";
+import { Board, boardArchived, boardUpdated, fetchBoards, getBoards } from "../../store/reducers/boards";
 import EditableField from "../EditableField";
 
 const Header: React.FC = () => {
@@ -17,14 +17,18 @@ const Header: React.FC = () => {
     const [showBoard, setShowBoard] = useState(false);
     const [showBoards, setShowBoards] = useState(false);
 
-    const boards: Board[] = useSelector((state: BoardsState) => state.boards);
+    const boards: Board[] = useSelector(getBoards());
 
-    const handleArchiveBoard = (event: any, id: number) => {
+    useEffect(() => {
+        dispatch(fetchBoards());
+    }, [])
+
+    const handleArchiveBoard = (event: any, id: string) => {
       event.stopPropagation();
       dispatch(boardArchived({ id }))
     }
 
-    const handleUpdateBoard = (id: number, title: string) => {
+    const handleUpdateBoard = (id: string, title: string) => {
         dispatch(boardUpdated({ id, title }))
     }
 
@@ -37,7 +41,7 @@ const Header: React.FC = () => {
             <Grid row={true} expanded={true}>
                 <Grid column={true} lg={4}>
                     <Button onClick={() => setShowBoards(!showBoards)} variant="transparent">Boards</Button>
-                    <Button variant="transparent">nn</Button>
+                    <Button variant="transparent">{boards[0] && boards[0].title}</Button>
                     <PopoverMenu
                         position='left'
                         title="boards"

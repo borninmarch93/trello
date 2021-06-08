@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Modal from "../../components/Modal";
 import Grid from "../../components/Grid";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -6,13 +6,13 @@ import { faArchive, faComment } from "@fortawesome/free-solid-svg-icons";
 import Feed from "../Feed";
 import { faCreditCard } from "@fortawesome/free-solid-svg-icons/faCreditCard";
 import { useDispatch, useSelector } from "react-redux";
-import { commentAdded, CommentsState } from "../../store/reducers/comments";
+import { addComment, fetchCommentsByCardId, getCommentsByCardId } from "../../store/reducers/comments";
 import Button from "../../components/Button";
 import EditableField from "../../components/EditableField";
 import { cardArchived, cardUpdated } from "../../store/reducers/cards";
 
 export interface CardProps {
-    id: number,
+    id: string,
     list: string,
     title: string
 }
@@ -21,17 +21,15 @@ const Card: React.FC<CardProps> = ({ id, title, list }) => {
     const dispatch = useDispatch();
     const [show, setShow] = useState(false);
 
-    const comments = useSelector((state: CommentsState) => {
-        return state.comments.filter(comment => comment.cardId === id)
-    })
+    useEffect(() => {
+        dispatch(fetchCommentsByCardId(id));
+    }, []);
+
+
+    const comments = useSelector(getCommentsByCardId(id));
 
     const onAddCommentHandler = (comment: string) => {
-        dispatch(commentAdded({
-            firstName: 'Vedrana',
-            lastName: 'Bradasevic',
-            text: comment,
-            cardId: id
-        }))
+        dispatch(addComment(id, comment));
     }
 
     const editTitleHandler = (value: string) => {

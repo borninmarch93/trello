@@ -1,7 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { apiCallBegan } from "../actions/api";
+import { createSelector } from "reselect";
 
 export interface Board {
-    id: number,
+    id: string,
     title: string
 }
 
@@ -11,21 +13,12 @@ export interface BoardsState {
 
 const slice = createSlice({
     name: 'boards',
-    initialState: [
-        {
-            id: 1,
-            title: 'board1'
-        },
-        {
-            id: 2,
-            title: 'board2'
-        }
-    ],
+    initialState: [] as Board[],
     reducers: {
         boardAdded: (boards, action) => {
             const { title } = action.payload;
             boards.push({
-                id: Math.random() * 1000,
+                id: '',
                 title
             })
         },
@@ -40,10 +33,29 @@ const slice = createSlice({
             const { id } = action.payload;
             const boardIndex = boards.findIndex(board => board.id === id);
             boards.splice(boardIndex, 1);
+        },
+        boardsReceived: (boards, action) => {
+            console.log('payload', action.payload);
+            const responsePayload = action.payload;
+            return responsePayload.map((board: any) => {
+                return {
+                    id: board.id,
+                    title: board.name
+                }
+            })
         }
     }
 })
 
-export const { boardAdded, boardUpdated, boardArchived } = slice.actions;
+export const { boardAdded, boardUpdated, boardsReceived, boardArchived } = slice.actions;
+
+// Action creators
+export const fetchBoards = () => {
+    const url = `${process.env.REACT_APP_API_HOST}/1/organizations/${process.env.REACT_APP_ORGANIZATION_ID}/boards?key=${process.env.REACT_APP_API_KEY}&token=${process.env.REACT_APP_TOKEN}`;
+    return apiCallBegan({ url, onSuccess: boardsReceived.type })
+}
+
+// Selectors
+export const getBoards = () => createSelector((state: BoardsState) => state.boards, boards => boards);
 
 export default slice.reducer;

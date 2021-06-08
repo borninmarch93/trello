@@ -2,36 +2,31 @@ import Grid from "../../../../components/Grid";
 import React, { useState } from "react";
 import moment from "moment";
 import { useDispatch } from "react-redux";
-import { commentRemoved, commentUpdated } from "../../../../store/reducers/comments";
+import { removeComment, updateComment } from "../../../../store/reducers/comments";
 import Button from "../../../../components/Button";
 import Textarea from "../../../../components/Textarea";
 
 export interface CommentProps {
-    id: number,
-    firstName: string,
-    lastName: string,
+    id: string,
+    cardId: string,
+    fullName: string,
+    initials: string,
     createdAt: string,
     text: string
 }
 
-const Comment: React.FC<CommentProps> = ({ id, firstName, lastName, createdAt, text }) => {
+const Comment: React.FC<CommentProps> = ({ id, cardId, initials, fullName, createdAt, text }) => {
     const dispatch = useDispatch();
     const [editComment, setEditComment] = useState(false);
     const [newComment, setNewComment] = useState(text);
 
-    const getInitials = () => {
-        const firstInitial = firstName ? firstName.charAt(0) : '';
-        const lastInitial = lastName ? lastName.charAt(0) : '';
-        return `${firstInitial}${lastInitial}`
-    }
-
     const handleUpdateComment = () => {
-        dispatch(commentUpdated({ id, text: newComment }));
+        dispatch(updateComment(id, cardId, newComment));
         setEditComment(false);
     }
 
     const handleDeleteComment = () => {
-        dispatch(commentRemoved({ id }));
+        dispatch(removeComment(id, cardId));
     }
 
     return (
@@ -39,11 +34,11 @@ const Comment: React.FC<CommentProps> = ({ id, firstName, lastName, createdAt, t
             <Grid row={true}>
                 <div className="comment__avatar-container">
                     <div className="avatar">
-                        <span>{getInitials()}</span>
+                        <span>{initials}</span>
                     </div>
                 </div>
                 <div className="comment__owner">
-                    <p>{firstName} {lastName}</p>
+                    <p>{fullName}</p>
                     <span>{moment(createdAt).fromNow()}</span>
                 </div>
             </Grid>

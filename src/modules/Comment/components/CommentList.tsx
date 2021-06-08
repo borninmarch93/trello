@@ -12,9 +12,10 @@ const CommentList: React.FC<CommentListProps> = ({ comments }) => {
                 return <Comment
                     key={index}
                     id={comment.id}
+                    cardId={comment.cardId}
                     createdAt={comment.createdAt}
-                    firstName={comment.firstName}
-                    lastName={comment.lastName}
+                    fullName={comment.fullName}
+                    initials={comment.initials}
                     text={comment.text}
                 />
             })}

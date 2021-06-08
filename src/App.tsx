@@ -5,7 +5,6 @@ import configureStore from "./store/configureStore";
 import { Provider } from "react-redux";
 
 const App: React.FC = () => {
-
     const store = configureStore();
 
     return (
