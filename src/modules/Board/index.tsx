@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import List from "../List/List";
 import AddList from "../List/components/AddList";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchLists, getLists, listAdded } from "../../store/reducers/lists";
+import { addList, fetchLists, getLists } from "../../store/reducers/lists";
 import { fetchCardsByBoardId } from "../../store/reducers/cards";
 
 interface BoardProps {
@@ -19,10 +19,7 @@ const Board: React.FC<BoardProps> = ({ id }) => {
     }, [])
 
     const addNewListHandler = (title: string) => {
-        dispatch(listAdded({
-            title,
-            boardId: id
-        }))
+        dispatch(addList(id, title));
     }
 
     return (

@@ -2,7 +2,7 @@ import React from "react";
 import AddCard from "../Card/components/AddCard";
 import Card from "../Card";
 import { useDispatch, useSelector } from "react-redux";
-import { getListById, listArchived, listUpdated } from "../../store/reducers/lists";
+import { archiveList, getListById, updateList } from "../../store/reducers/lists";
 import { addCard, getCardsByListId } from "../../store/reducers/cards";
 import EditableField from "../../components/EditableField";
 import Button from "../../components/Button";
@@ -26,11 +26,11 @@ const List: React.FC<ListProps> = ({ id }) => {
     }
 
     const handleUpdateList = (value: string) => {
-        dispatch(listUpdated({ id, title: value }));
+        dispatch(updateList(id, value));
     }
 
     const handleArchiveList = () => {
-        dispatch(listArchived({ id }));
+        dispatch(archiveList(id, true));
     }
 
     return (

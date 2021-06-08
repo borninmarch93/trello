@@ -17,18 +17,23 @@ const slice = createSlice({
     initialState: [] as List[],
     reducers: {
         listAdded: (lists, action) => {
-            const {title, boardId} = action.payload;
-            lists.push({
-                id: '',
-                boardId,
-                title
-            })
+            const list = action.payload;
+            const mappedList = {
+                id: list.id,
+                boardId: list.idBoard,
+                title: list.name
+            }
+            lists.push(mappedList);
         },
         listUpdated: (lists, action) => {
-            const { id, title } = action.payload;
-            const listIndex = lists.findIndex(list => list.id === id);
+            const list = action.payload;
+            const mappedList = {
+                id: list.id,
+                title: list.name
+            }
+            const listIndex = lists.findIndex(list => list.id === mappedList.id);
             if (listIndex !== -1) {
-                lists[listIndex].title = title;
+                lists[listIndex].title = mappedList.title;
             }
         },
         listArchived: (lists, action) => {
@@ -51,11 +56,25 @@ const slice = createSlice({
 
 export const { listAdded, listUpdated, listArchived, listsReceived } = slice.actions;
 
-
 // Action creators
 export const fetchLists = (boardId: string) => {
     const url = `${process.env.REACT_APP_API_HOST}/1/boards/${boardId}/lists?key=${process.env.REACT_APP_API_KEY}&token=${process.env.REACT_APP_TOKEN}`;
     return apiCallBegan({url, onSuccess: listsReceived.type})
+}
+
+export const addList = (boardId: string, title: string) => {
+    const url = `${process.env.REACT_APP_API_HOST}/1/lists?key=${process.env.REACT_APP_API_KEY}&token=${process.env.REACT_APP_TOKEN}&idBoard=${boardId}&name=${title}`;
+    return apiCallBegan({url, method: 'POST', onSuccess: listAdded.type})
+}
+
+export const updateList = (listId: string, title: string) => {
+    const url = `${process.env.REACT_APP_API_HOST}/1/lists/${listId}?key=${process.env.REACT_APP_API_KEY}&token=${process.env.REACT_APP_TOKEN}&name=${title}`;
+    return apiCallBegan({url, method: 'PUT', onSuccess: listUpdated.type})
+}
+
+export const archiveList = (listId: string, value: boolean) => {
+    const url = `${process.env.REACT_APP_API_HOST}/1/lists/${listId}/closed?key=${process.env.REACT_APP_API_KEY}&token=${process.env.REACT_APP_TOKEN}&value=${value}`;
+    return apiCallBegan({url, method: 'PUT', onSuccess: listArchived.type})
 }
 
 // Selectors
