@@ -15,6 +15,7 @@ const App: React.FC = () => {
                     <Route path="/boards/:id/cards/:cardId/comments/:commentId" component={ Dashboard } />
                     <Route path="/boards/:id/cards/:cardId" component={ Dashboard } />
                     <Route path="/boards/:id" component={ Dashboard } />
+                    <Route path="/" component={ Dashboard } />
                 </Switch>
             </Router>
         </Provider>
