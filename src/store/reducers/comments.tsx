@@ -1,5 +1,5 @@
-import { createSlice } from "@reduxjs/toolkit";
-import { apiCallBegan } from "../actions/api";
+import { createSlice, OutputSelector, PayloadAction } from "@reduxjs/toolkit";
+import { apiCallBegan, ApiCallPayload } from "../actions/api";
 import { createSelector } from "reselect";
 
 export interface Comment {
@@ -9,6 +9,21 @@ export interface Comment {
     initials: string,
     createdAt: string,
     text: string
+}
+
+interface TrelloApiComment {
+    id: string,
+    data: {
+        card: {
+            id: string
+        },
+        text: string
+    },
+    memberCreator: {
+        fullName: string,
+        initials: string
+    },
+    date: string
 }
 
 export interface CommentsState {
@@ -51,7 +66,7 @@ const slice = createSlice({
         },
         commentReceived: (comments, action) => {
             const responsePayload = action.payload;
-            return responsePayload.map((comment: any) => {
+            return responsePayload.map((comment: TrelloApiComment) => {
                 return {
                     id: comment.id,
                     cardId: comment.data.card.id,
@@ -69,29 +84,29 @@ export const { commentAdded, commentUpdated, commentRemoved, commentReceived } =
 
 // Action creators
 
-export const fetchCommentsByCardId = (cardId: string) => {
+export const fetchCommentsByCardId = (cardId: string): PayloadAction<ApiCallPayload> => {
     const url = `${process.env.REACT_APP_API_HOST}/1/cards/${cardId}/actions?key=${process.env.REACT_APP_API_KEY}&token=${process.env.REACT_APP_TOKEN}&filter=commentCard`;
     return apiCallBegan({ url, onSuccess: commentReceived.type })
 }
 
-export const addComment = (cardId: string, text: string) => {
+export const addComment = (cardId: string, text: string): PayloadAction<ApiCallPayload> => {
     const url = `${process.env.REACT_APP_API_HOST}/1/cards/${cardId}/actions/comments?key=${process.env.REACT_APP_API_KEY}&token=${process.env.REACT_APP_TOKEN}&text=${text}`;
     return apiCallBegan({ url, method: 'POST', onSuccess: commentAdded.type })
 }
 
-export const updateComment = (commentId: string, cardId: string, text: string) => {
+export const updateComment = (commentId: string, cardId: string, text: string): PayloadAction<ApiCallPayload> => {
     const url = `${process.env.REACT_APP_API_HOST}/1/cards/${cardId}/actions/${commentId}/comments?key=${process.env.REACT_APP_API_KEY}&token=${process.env.REACT_APP_TOKEN}&text=${text}`;
     return apiCallBegan({ url, method: 'PUT', onSuccess: commentUpdated.type })
 }
 
-export const removeComment = (commentId: string, cardId: string) => {
+export const removeComment = (commentId: string, cardId: string): PayloadAction<ApiCallPayload> => {
     const url = `${process.env.REACT_APP_API_HOST}/1/cards/${cardId}/actions/${commentId}/comments?key=${process.env.REACT_APP_API_KEY}&token=${process.env.REACT_APP_TOKEN}`;
     return apiCallBegan({ url, method: 'DELETE', onSuccess: commentRemoved.type })
 }
 
 // Selectors
 
-export const getCommentsByCardId = (cardId: string) => createSelector(
+export const getCommentsByCardId = (cardId: string): OutputSelector<CommentsState, Comment[], (res: Comment[]) => Comment[]> => createSelector(
     (state: CommentsState) => state.comments,
     comments => comments.filter(comment => comment.cardId === cardId)
 );

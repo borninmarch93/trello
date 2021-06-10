@@ -1,5 +1,5 @@
-import { createSlice } from "@reduxjs/toolkit";
-import { apiCallBegan } from "../actions/api";
+import { createSlice, OutputSelector, PayloadAction } from "@reduxjs/toolkit";
+import { apiCallBegan, ApiCallPayload } from "../actions/api";
 import { createSelector } from "reselect";
 
 export interface Member {
@@ -32,13 +32,13 @@ const slice = createSlice(
 export const { memberReceived } = slice.actions;
 
 // Action creators
-export const fetchMember = () => {
+export const fetchMember = (): PayloadAction<ApiCallPayload> => {
     const url = `${process.env.REACT_APP_API_HOST}/1/tokens/${process.env.REACT_APP_TOKEN}/member?key=${process.env.REACT_APP_API_KEY}&token=${process.env.REACT_APP_TOKEN}`
     return apiCallBegan({ url, onSuccess: memberReceived.type})
 }
 
 // Selectors
-export const getMember = () => createSelector(
+export const getMember = (): OutputSelector<MembersState, Member, (res: Member) => Member> => createSelector(
     (state: MembersState) => state.members,
     members => members
 )

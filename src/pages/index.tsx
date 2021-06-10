@@ -6,7 +6,12 @@ import Header from "../components/Header";
 import React, { useEffect } from "react";
 import { fetchMember, getMember, Member } from "../store/reducers/members";
 
-const Dashboard: React.FC<RouteComponentProps<any>> = ({match}) => {
+interface MatchParams {
+    id: string,
+    cardId?: string
+}
+
+const Dashboard: React.FC<RouteComponentProps<MatchParams>> = ({match}) => {
     const dispatch = useDispatch();
 
     const boards: BoardType[] = useSelector(getBoards());

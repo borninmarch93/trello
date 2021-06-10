@@ -1,8 +1,8 @@
-import React from "react";
+import React, { ChangeEvent } from "react";
 
 interface TextareaProps {
     value: string | number,
-    onChange: (event: any) => void,
+    onChange: (event: ChangeEvent<HTMLTextAreaElement>) => void,
     placeholder?: string
 }
 

@@ -41,7 +41,7 @@ const List: React.FC<ListProps> = ({id, selectedCardId}) => {
     }
 
     return (
-        <DroppableContainer data={5} onDrop={cardMovedHandler}>
+        <DroppableContainer onDrop={cardMovedHandler}>
             <div className="list-wrapper">
                 {list &&
                 <div className="list">

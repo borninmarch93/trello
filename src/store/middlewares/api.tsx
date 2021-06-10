@@ -1,7 +1,7 @@
 import { apiCallBegan, apiCallFailed, apiCallSuccess } from "../actions/api";
 import { AnyAction, Dispatch, MiddlewareAPI } from "redux";
 
-const api = ({ dispatch } : MiddlewareAPI) => (next: Dispatch) => async (action: AnyAction) => {
+const api = ({ dispatch } : MiddlewareAPI) => (next: Dispatch): (action: AnyAction) => Promise<AnyAction | undefined> => async (action: AnyAction) => {
     if (action.type !== apiCallBegan.type) return next(action);
     next(action);
 

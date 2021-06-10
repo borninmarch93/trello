@@ -1,11 +1,11 @@
-import React from "react";
+import React, { ChangeEvent, KeyboardEvent, RefObject } from "react";
 
 interface InputProps {
-    inputRef?: any,
+    inputRef?: RefObject<HTMLInputElement>,
     type: string,
     value: string | number,
-    onChange: (event: any) => void,
-    onKeyDown?: (event: any) => void,
+    onChange: (event: ChangeEvent<HTMLInputElement>) => void,
+    onKeyDown?: (event: KeyboardEvent<HTMLInputElement>) => void,
     placeholder?: string
 }
 

@@ -3,7 +3,7 @@ import Button from "../../Button";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArchive } from "@fortawesome/free-solid-svg-icons";
 import PopoverMenu from "../../PopoverMenu";
-import React from "react";
+import React, { MouseEvent } from "react";
 import { archiveBoard, Board, updateBoard } from "../../../store/reducers/boards";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
@@ -18,7 +18,7 @@ const BoardsPopover: React.FC<BoardsPopoverProps> = ({ show, onClose, boards }) 
     const dispatch = useDispatch();
     const history = useHistory();
 
-    const handleArchiveBoard = (event: any, id: string) => {
+    const handleArchiveBoard = (event: MouseEvent<HTMLButtonElement>, id: string) => {
         event.stopPropagation();
         dispatch(archiveBoard(id));
     }
@@ -38,7 +38,7 @@ const BoardsPopover: React.FC<BoardsPopoverProps> = ({ show, onClose, boards }) 
         onClose={onClose}
         show={show}>
         <div className="popover__boards">
-            {boards && boards.map((board: any, index: any) => {
+            {boards && boards.map((board: Board, index: number) => {
                 return <div
                     onClick={() => handleBoardChange(board.id)}
                     className="popover__board"

@@ -11,7 +11,7 @@ interface AddCommentProps {
 const AddComment: React.FC<AddCommentProps> = ({ onAdd }) => {
     const [comment, setComment] = useState('');
 
-    const textHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const textHandler = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
         const { value } = event.target;
         setComment(value);
     }

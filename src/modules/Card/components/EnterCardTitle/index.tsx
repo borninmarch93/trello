@@ -12,7 +12,7 @@ interface EnterCardTitleProps {
 const EnterCardTitle: React.FC<EnterCardTitleProps> = ({ onClose, onAddNewCard }) => {
     const [title, setTitle] = useState('');
 
-    const textHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const textHandler = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
         const { value } = event.target;
         setTitle(value);
     }

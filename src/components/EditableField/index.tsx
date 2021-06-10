@@ -12,7 +12,7 @@ const EditableField: React.FC<EditableFieldProps> = ({ renderValue, value, onSub
     const [edit, setEdit] = useState(initialEdit);
     const [currValue, setCurrValue] = useState(value);
 
-    const ref = useRef<HTMLDivElement>(null);
+    const ref = useRef<HTMLInputElement>(null);
 
     const handleClickOutside = (event: MouseEvent) => {
         if (ref.current && !ref.current.contains(event.target as Element)) {
