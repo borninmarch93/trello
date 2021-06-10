@@ -72,4 +72,9 @@ export const archiveBoard = (boardId: string) => {
 // Selectors
 export const getBoards = () => createSelector((state: BoardsState) => state.boards, boards => boards);
 
+export const getBoardById = (boardId: string) => createSelector(
+    (state: BoardsState) => state.boards,
+    boards => boards.find(board => board.id === boardId)
+);
+
 export default slice.reducer;

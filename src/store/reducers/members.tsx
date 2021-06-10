@@ -19,7 +19,6 @@ const slice = createSlice(
         reducers: {
             memberReceived: (members, action) => {
                 const member = action.payload;
-                console.log('cao,', member)
                 return {
                     fullName: member.fullName,
                     initials: member.initials,

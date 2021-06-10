@@ -40,6 +40,9 @@
     @include m(lg) {
         width: 768px;
         min-height: 600px;
+        @media (max-width: 768px) {
+            width: 100%;
+        }
     }
     @include e(header) {
         @include flexbox;

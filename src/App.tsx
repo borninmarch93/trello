@@ -1,4 +1,5 @@
 import React from "react";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import './sass/main.scss';
 import Dashboard from "./pages";
 import configureStore from "./store/configureStore";
@@ -9,7 +10,13 @@ const App: React.FC = () => {
 
     return (
         <Provider store={store}>
-            <Dashboard />
+            <Router>
+                <Switch>
+                    <Route path="/boards/:id/cards/:cardId/comments/:commentId" component={ Dashboard } />
+                    <Route path="/boards/:id/cards/:cardId" component={ Dashboard } />
+                    <Route path="/boards/:id" component={ Dashboard } />
+                </Switch>
+            </Router>
         </Provider>
     );
 }

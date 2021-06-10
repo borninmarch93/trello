@@ -1,39 +1,23 @@
-import React, { useEffect, useState } from "react";
-import Modal from "../../components/Modal";
+import React, { useState } from "react";
 import Grid from "../../components/Grid";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArchive, faComment } from "@fortawesome/free-solid-svg-icons";
-import Feed from "../Feed";
-import { faCreditCard } from "@fortawesome/free-solid-svg-icons/faCreditCard";
-import { useDispatch, useSelector } from "react-redux";
-import { addComment, fetchCommentsByCardId, getCommentsByCardId } from "../../store/reducers/comments";
+import { faArchive, faComments } from "@fortawesome/free-solid-svg-icons";
+import { useDispatch } from "react-redux";
 import Button from "../../components/Button";
-import EditableField from "../../components/EditableField";
-import { removeCard, updateCard } from "../../store/reducers/cards";
+import { removeCard } from "../../store/reducers/cards";
+import CardModal from "./components/CardModal";
 
 export interface CardProps {
     id: string,
     list: string,
-    title: string
+    title: string,
+    commentsCount: number,
+    selected?: boolean
 }
 
-const Card: React.FC<CardProps> = ({ id, title, list }) => {
+const Card: React.FC<CardProps> = ({ id, title, commentsCount, list, selected= false }) => {
     const dispatch = useDispatch();
-    const [show, setShow] = useState(false);
-
-    useEffect(() => {
-        dispatch(fetchCommentsByCardId(id));
-    }, []);
-
-    const comments = useSelector(getCommentsByCardId(id));
-
-    const onAddCommentHandler = (comment: string) => {
-        dispatch(addComment(id, comment));
-    }
-
-    const editTitleHandler = (value: string) => {
-        dispatch(updateCard(id, value));
-    }
+    const [show, setShow] = useState(selected);
 
     const archiveCard = () => {
         dispatch(removeCard(id));
@@ -42,44 +26,28 @@ const Card: React.FC<CardProps> = ({ id, title, list }) => {
     return (
         <React.Fragment>
             <div className='card'>
-                <div className="card__title" onClick={() => setShow(true)}>
-                    {title}
-                </div>
-                <Button variant="transparent" onClick={() => archiveCard()}>
-                    <FontAwesomeIcon icon={faArchive}/>
-                </Button>
+                <Grid row={true}>
+                    <div className="card__title" onClick={() => setShow(true)}>
+                        {title}
+                    </div>
+                    <Button variant="transparent" onClick={() => archiveCard()}>
+                        <FontAwesomeIcon icon={faArchive}/>
+                    </Button>
+                </Grid>
+                {Boolean(commentsCount) &&
+                    <Grid className="card__comments" row={true}>
+                        <FontAwesomeIcon icon={faComments}/>
+                        <span>{commentsCount}</span>
+                    </Grid>
+                }
             </div>
-            <Modal size="lg" show={show} onClose={() => setShow(false)} title="card">
-                <Modal.Header>
-                    <Grid row className="modal__header">
-                        <Grid column={true} lg={12}>
-                            <div className="modal__title">
-                                <FontAwesomeIcon icon={faCreditCard}/>
-                                <div>
-                                   <EditableField
-                                       value={title}
-                                       renderValue={(value) => <h4>{value}</h4>}
-                                       onSubmit={editTitleHandler} />
-                                    <p>in list <span className="modal--underline">{list}</span></p>
-                                </div>
-                            </div>
-                        </Grid>
-                    </Grid>
-                </Modal.Header>
-                <Modal.Body>
-                    <Grid row={true}>
-                        <Grid column={true} lg={12}>
-                            <div className="modal__title">
-                                <FontAwesomeIcon icon={faComment}/>
-                                <div>
-                                    <h3>Activity</h3>
-                                </div>
-                            </div>
-                        </Grid>
-                    </Grid>
-                    <Feed comments={comments} onAdd={onAddCommentHandler}/>
-                </Modal.Body>
-            </Modal>
+            <CardModal
+                show={show}
+                onClose={() => setShow(false)}
+                id={id}
+                title={title}
+                list={list}
+            />
         </React.Fragment>
     )
 }

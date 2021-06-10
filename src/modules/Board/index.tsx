@@ -6,17 +6,18 @@ import { addList, fetchLists, getLists } from "../../store/reducers/lists";
 import { fetchCardsByBoardId } from "../../store/reducers/cards";
 
 interface BoardProps {
-    id: string
+    id: string,
+    selectedCardId?: string
 }
 
-const Board: React.FC<BoardProps> = ({ id }) => {
+const Board: React.FC<BoardProps> = ({ id, selectedCardId }) => {
     const dispatch = useDispatch();
     const lists = useSelector(getLists(id));
 
     useEffect(() => {
         dispatch(fetchLists( id ));
         dispatch(fetchCardsByBoardId(id));
-    }, [])
+    }, [id])
 
     const addNewListHandler = (title: string) => {
         dispatch(addList(id, title));
@@ -27,7 +28,7 @@ const Board: React.FC<BoardProps> = ({ id }) => {
             <div className="container">
                 <div className="board">
                     {lists && lists.map((list, i) => {
-                        return <List id={list.id} key={i} />
+                        return <List id={list.id} key={i} selectedCardId={selectedCardId} />
                     })}
                     <AddList onAddNewList={addNewListHandler} />
                 </div>

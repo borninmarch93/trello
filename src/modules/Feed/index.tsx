@@ -9,7 +9,7 @@ interface FeedProps {
 const Feed: React.FC<CommentListProps & FeedProps>= ({ comments, onAdd }) => {
     return (
        <React.Fragment>
-           <AddComment  onAdd={onAdd}/>
+           <AddComment onAdd={onAdd}/>
            <CommentList comments={comments}/>
        </React.Fragment>
     )

@@ -36,10 +36,6 @@ a {
     background-image: url("https://trello-backgrounds.s3.amazonaws.com/SharedBackground/1440x1920/46a110d9097386018f38bec44a8bb79f/photo-1622630395351-24d5917c1c1f.jpg");
 }
 
-.content {
-    height: 100%;
-}
-
-::-webkit-scrollbar {
-    display: none;
+.content, .container, .board {
+    height: calc(100vh - 105px);
 }

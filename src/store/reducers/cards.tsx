@@ -6,7 +6,8 @@ export interface Card {
     id: string,
     listId: string,
     boardId: string,
-    title: string
+    title: string,
+    commentsCount: number
 }
 
 export interface CardsState {
@@ -23,7 +24,8 @@ const slice = createSlice({
                 id: card.id,
                 listId: card.idList,
                 boardId: card.idBoard,
-                title: card.name
+                title: card.name,
+                commentsCount: card.badges.comments
             }
            cards.push(mappedCard);
         },
@@ -31,11 +33,14 @@ const slice = createSlice({
             const card = action.payload;
             const mappedCard = {
                 id: card.id,
-                title: card.name
+                listId: card.idList,
+                boardId: card.idBoard,
+                title: card.name,
+                commentsCount: card.badges.comments
             }
             const cardIndex = cards.findIndex(card => card.id === mappedCard.id);
             if (cardIndex !== -1) {
-                cards[cardIndex].title = mappedCard.title;
+                cards[cardIndex] = mappedCard;
             }
         },
         cardArchived: (cards, action) => {
@@ -50,7 +55,8 @@ const slice = createSlice({
                     id: card.id,
                     boardId: card.idBoard,
                     listId: card.idList,
-                    title: card.name
+                    title: card.name,
+                    commentsCount: card.badges.comments
                 }
             })
         }
@@ -73,6 +79,11 @@ export const addCard = (listId: string, title: string) => {
 
 export const updateCard = (cardId: string, title: string) => {
     const url = `${process.env.REACT_APP_API_HOST}/1/cards/${cardId}?key=${process.env.REACT_APP_API_KEY}&token=${process.env.REACT_APP_TOKEN}&name=${title}`;
+    return apiCallBegan({ url, method: 'PUT', onSuccess: cardUpdated.type })
+}
+
+export const moveCard = (cardId: string, listId: string) => {
+    const url = `${process.env.REACT_APP_API_HOST}/1/cards/${cardId}?key=${process.env.REACT_APP_API_KEY}&token=${process.env.REACT_APP_TOKEN}&idList=${listId}`;
     return apiCallBegan({ url, method: 'PUT', onSuccess: cardUpdated.type })
 }
 

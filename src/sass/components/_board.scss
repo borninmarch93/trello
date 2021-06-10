@@ -1,6 +1,7 @@
 .board {
     @include flexbox;
+    max-width: 1500px;
     padding: 5px;
     margin-top: 52px;
-    overflow-x: auto;
+    overflow-x: scroll;
 }

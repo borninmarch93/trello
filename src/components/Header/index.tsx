@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useHistory } from "react-router-dom";
 import Button from "../Button";
 import Avatar from "../Avatar";
 import Grid from "../Grid";
@@ -12,8 +13,13 @@ import { archiveBoard, Board, fetchBoards, getBoards, updateBoard } from "../../
 import EditableField from "../EditableField";
 import { fetchMember, getMember } from "../../store/reducers/members";
 
-const Header: React.FC = () => {
+interface HeaderProps {
+    boardTitle?: string
+}
+
+const Header: React.FC<HeaderProps> = ({ boardTitle }) => {
     const dispatch = useDispatch();
+    const history = useHistory();
     const [showAccount, setShowAccount] = useState(false);
     const [showBoard, setShowBoard] = useState(false);
     const [showBoards, setShowBoards] = useState(false);
@@ -35,8 +41,9 @@ const Header: React.FC = () => {
         dispatch(updateBoard(id, title));
     }
 
-    const handleBoardChange = () => {
-        console.log('b')
+    const handleBoardChange = (boardId: string) => {
+        history.push(`/boards/${boardId}`);
+        setShowBoards(false);
     }
 
     return (
@@ -44,7 +51,7 @@ const Header: React.FC = () => {
             <Grid row={true} expanded={true}>
                 <Grid column={true} lg={4}>
                     <Button onClick={() => setShowBoards(!showBoards)} variant="transparent">Boards</Button>
-                    <Button variant="transparent">{boards[0] && boards[0].title}</Button>
+                    <Button variant="transparent">{boardTitle}</Button>
                     <PopoverMenu
                         position='left'
                         title="boards"
@@ -53,7 +60,7 @@ const Header: React.FC = () => {
                         <div className="popover__boards">
                             {boards && boards.map((board: any, index: any) => {
                                 return <div
-                                    onClick={handleBoardChange}
+                                    onClick={() => handleBoardChange(board.id)}
                                     className="popover__board"
                                     key={index}>
                                     <EditableField

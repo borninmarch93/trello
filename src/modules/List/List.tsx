@@ -10,10 +10,11 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArchive } from "@fortawesome/free-solid-svg-icons";
 
 interface ListProps {
-    id: string
+    id: string,
+    selectedCardId?: string
 }
 
-const List: React.FC<ListProps> = ({ id }) => {
+const List: React.FC<ListProps> = ({id, selectedCardId}) => {
     const dispatch = useDispatch();
     const list = useSelector(getListById(id));
     const cards = useSelector(getCardsByListId(id));

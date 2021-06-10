@@ -36,6 +36,8 @@
         }
     }
     @include m(show) {
+        margin: 10px 0;
+        padding: 5px 0;
         & > :first-child {
             align-items: center;
             p {
@@ -45,10 +47,14 @@
             }
         }
     }
+    @include m(selected) {
+        background: #e4f0f6;
+        border-left: 4px solid #0079bf;
+    }
     @include e(owner) {
         @include flexbox;
         align-items: center;
-        span {
+        a {
             color: #5e6c84;
             font-size: 12px;
             &:hover {
@@ -72,4 +78,10 @@
         margin-left: 4rem;
         margin-bottom: 2rem;
     }
+}
+
+.comment-list {
+    max-height: 260px;
+    padding: 0 5px;
+    overflow-y: scroll;
 }

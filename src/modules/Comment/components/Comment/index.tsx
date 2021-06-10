@@ -1,10 +1,12 @@
 import Grid from "../../../../components/Grid";
 import React, { useState } from "react";
+import { Link, useHistory } from "react-router-dom";
 import moment from "moment";
 import { useDispatch } from "react-redux";
 import { removeComment, updateComment } from "../../../../store/reducers/comments";
 import Button from "../../../../components/Button";
 import Textarea from "../../../../components/Textarea";
+import classNames from "classnames";
 
 export interface CommentProps {
     id: string,
@@ -12,11 +14,13 @@ export interface CommentProps {
     fullName: string,
     initials: string,
     createdAt: string,
-    text: string
+    text: string,
+    selected?: boolean
 }
 
-const Comment: React.FC<CommentProps> = ({ id, cardId, initials, fullName, createdAt, text }) => {
+const Comment: React.FC<CommentProps> = ({ id, cardId, initials, fullName, createdAt, text, selected = false }) => {
     const dispatch = useDispatch();
+    const history = useHistory();
     const [editComment, setEditComment] = useState(false);
     const [newComment, setNewComment] = useState(text);
 
@@ -29,8 +33,13 @@ const Comment: React.FC<CommentProps> = ({ id, cardId, initials, fullName, creat
         dispatch(removeComment(id, cardId));
     }
 
+    const classes = classNames(
+        'comment--show',
+        selected && 'comment--selected'
+    )
+
     return (
-        <div className="comment--show">
+        <div className={classes}>
             <Grid row={true}>
                 <div className="comment__avatar-container">
                     <div className="avatar">
@@ -39,7 +48,9 @@ const Comment: React.FC<CommentProps> = ({ id, cardId, initials, fullName, creat
                 </div>
                 <div className="comment__owner">
                     <p>{fullName}</p>
-                    <span>{moment(createdAt).fromNow()}</span>
+                    <Link title={moment(createdAt).format('MMMM D, YYYY HH:mm A')} to={`${history.location.pathname}#commentId=${id}`}>
+                        {moment(createdAt).fromNow()}
+                    </Link>
                 </div>
             </Grid>
             <Grid row={true}>
