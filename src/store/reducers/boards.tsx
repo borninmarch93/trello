@@ -77,7 +77,7 @@ export const archiveBoard = (boardId: string): PayloadAction<ApiCallPayload> => 
 // Selectors
 export const getBoards = (): OutputSelector<BoardsState, Board[], (res: Board[]) => Board[]> => createSelector(
     (state: BoardsState) => state.boards,
-        boards => boards
+    boards => boards
 );
 
 export const getBoardById = (boardId: string): OutputSelector<BoardsState, Board | undefined, (res: Board[]) => Board | undefined> => createSelector(
