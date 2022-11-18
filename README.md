@@ -1,4 +1,4 @@
-LINK TO OPEN APPLICATION: https://trello-task-manager-9812e.web.app
+LINK TO OPEN APPLICATION IN BROWSER: https://trello-task-manager-9812e.web.app
 
 # Getting Started with Create React App
 
