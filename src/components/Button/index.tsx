@@ -8,13 +8,12 @@ interface ButtonProps {
     variant?: 'primary' | string
  }
 
-const Button: React.FC<ButtonProps> = (
-    { onClick,
+const Button: React.FC<ButtonProps> = ({ onClick,
         id,
         type,
         variant,
         children
-    }) => {
+}) => {
 
     const classes = classNames(
         'btn',

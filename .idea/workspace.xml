@@ -1,0 +1,281 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="113f9068-8c1e-4d8b-99c9-01ac34a270a7" name="Default Changelist" comment="fixed lint errors">
+      <change beforePath="$PROJECT_DIR$/tsconfig.json" beforeDir="false" afterPath="$PROJECT_DIR$/tsconfig.json" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitSEFilterConfiguration">
+    <file-type-list>
+      <filtered-out-file-type name="LOCAL_BRANCH" />
+      <filtered-out-file-type name="REMOTE_BRANCH" />
+      <filtered-out-file-type name="TAG" />
+      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
+    </file-type-list>
+  </component>
+  <component name="ProjectId" id="1tPK5ib48pyXBCqSMsLmCgi9wk3" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
+    <property name="ASKED_SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/modules/Card/components/AddCard" />
+    <property name="nodejs_package_manager_path" value="npm" />
+    <property name="prettierjs.PrettierConfiguration.Package" value="C:\Users\vedra\Documents\htec_project\jsvedrana.b\node_modules\prettier" />
+    <property name="settings.editor.selected.configurable" value="preferences.sourceCode.TypeScript" />
+    <property name="ts.external.directory.path" value="C:\Users\vedra\Documents\htec_project\jsvedrana.b\node_modules\typescript\lib" />
+    <property name="vue.rearranger.settings.migration" value="true" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\vedra\Documents\htec_project\jsvedrana.b\src\modules\Card\components\AddCard" />
+      <recent name="C:\Users\vedra\Documents\htec_project\jsvedrana.b\src\components\Textarea" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\vedra\Documents\htec_project\jsvedrana.b\src\components\DragAndDrop" />
+      <recent name="C:\Users\vedra\Documents\htec_project\jsvedrana.b\src\modules\List\components" />
+    </key>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="113f9068-8c1e-4d8b-99c9-01ac34a270a7" name="Default Changelist" comment="" />
+      <created>1622665103976</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1622665103976</updated>
+      <workItem from="1622665106777" duration="10462000" />
+      <workItem from="1622837961814" duration="3176000" />
+      <workItem from="1622841175921" duration="44858000" />
+      <workItem from="1623070118152" duration="64443000" />
+      <workItem from="1626444571265" duration="806000" />
+    </task>
+    <task id="LOCAL-00001" summary="Configuring ts, prettier, eslint">
+      <created>1622666875405</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1622666875405</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Add basic layout and styling">
+      <created>1622671533783</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1622671533783</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Add header and board basic components">
+      <created>1622836908057</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1622836908057</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Add header and board basic components">
+      <created>1622842466384</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1622842466385</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Add lists and cards">
+      <created>1622928436051</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1622928436051</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Add Card component">
+      <created>1622930276050</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1622930276050</updated>
+    </task>
+    <task id="LOCAL-00007" summary="Add Comment">
+      <created>1623015497223</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1623015497223</updated>
+    </task>
+    <task id="LOCAL-00008" summary="Add Card">
+      <created>1623015541838</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1623015541838</updated>
+    </task>
+    <task id="LOCAL-00009" summary="Add Modal">
+      <created>1623015626884</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1623015626884</updated>
+    </task>
+    <task id="LOCAL-00010" summary="Add avatar, popover components">
+      <created>1623015681108</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1623015681109</updated>
+    </task>
+    <task id="LOCAL-00011" summary="Added redux">
+      <created>1623025120371</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1623025120371</updated>
+    </task>
+    <task id="LOCAL-00012" summary="CRUD operations">
+      <created>1623105291691</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1623105291691</updated>
+    </task>
+    <task id="LOCAL-00013" summary="api calls for comments">
+      <created>1623188453741</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1623188453741</updated>
+    </task>
+    <task id="LOCAL-00014" summary="api calls for cards">
+      <created>1623189927955</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1623189927955</updated>
+    </task>
+    <task id="LOCAL-00015" summary="api calls for cards">
+      <created>1623190810549</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1623190810549</updated>
+    </task>
+    <task id="LOCAL-00016" summary="api calls for boards">
+      <created>1623192002718</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1623192002718</updated>
+    </task>
+    <task id="LOCAL-00017" summary="api calls for member">
+      <created>1623193544729</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1623193544729</updated>
+    </task>
+    <task id="LOCAL-00018" summary="routing">
+      <created>1623341303235</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1623341303235</updated>
+    </task>
+    <task id="LOCAL-00019" summary="drag n drop cards">
+      <created>1623344273528</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1623344273528</updated>
+    </task>
+    <task id="LOCAL-00020" summary="fixed lint errors">
+      <created>1623363936232</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1623363936233</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="992dbbb1-5b98-4faf-9a0a-312477dba509">
+          <value>
+            <State>
+              <option name="SHOW_ONLY_AFFECTED_CHANGES" value="true" />
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="HEAD" />
+                      </list>
+                    </value>
+                  </entry>
+                  <entry key="structure">
+                    <value>
+                      <list>
+                        <option value="dir:C:/Users/vedra/Documents/htec_project/jsvedrana.b/src/components" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
+          </value>
+        </entry>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="OPEN_GENERIC_TABS">
+      <map>
+        <entry key="992dbbb1-5b98-4faf-9a0a-312477dba509" value="TOOL_WINDOW" />
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+    <MESSAGE value="Configuring ts, prettier, eslint" />
+    <MESSAGE value="Add basic layout and styling" />
+    <MESSAGE value="Add header and board basic components" />
+    <MESSAGE value="Add lists and cards" />
+    <MESSAGE value="Add Card component" />
+    <MESSAGE value="Add Comment" />
+    <MESSAGE value="Add Card" />
+    <MESSAGE value="Add Modal" />
+    <MESSAGE value="Add avatar, popover components" />
+    <MESSAGE value="Added redux" />
+    <MESSAGE value="CRUD operations" />
+    <MESSAGE value="api calls for comments" />
+    <MESSAGE value="api calls for cards" />
+    <MESSAGE value="api calls for boards" />
+    <MESSAGE value="api calls for member" />
+    <MESSAGE value="routing" />
+    <MESSAGE value="drag n drop cards" />
+    <MESSAGE value="fixed lint errors" />
+    <option name="LAST_COMMIT_MESSAGE" value="fixed lint errors" />
+  </component>
+</project>
